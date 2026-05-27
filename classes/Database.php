@@ -19,3 +19,4 @@ class Database
         return self::$instance;
     }
 }
+"<?php // oop" 
