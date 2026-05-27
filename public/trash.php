@@ -142,3 +142,4 @@ $token = csrfToken();
 </div>
 </body>
 </html>
+"<?php // trash" 
