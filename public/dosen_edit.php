@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/session.php';
+require_once __DIR__ . '/../classes/AuditLog.php';
 
 requireLogin();
 
-$pdo = getDB();
-$id  = (int)($_GET['id'] ?? 0);
+$pdo   = getDB();
+$audit = new AuditLog();
+$id    = (int)($_GET['id'] ?? 0);
 
 // Ambil data dosen
 $stmt = $pdo->prepare('SELECT * FROM dosen WHERE id = :id AND deleted_at IS NULL');
@@ -106,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id'            => $id,
         ]);
 
+        $audit->catat('UPDATE', 'dosen', 'Edit dosen: ' . $input['nama']);
         $_SESSION['flash'] = 'Data dosen ' . $input['nama'] . ' berhasil diperbarui.';
         header('Location: /siakad-mini/public/dosen.php');
         exit;
@@ -220,4 +223,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </body>
 </html>
-"<?php // edit" 

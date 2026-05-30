@@ -152,6 +152,9 @@ $dosenBaru = $stmtBaru->fetchAll();
         <a href="/siakad-mini/public/trash.php" class="shortcut">
             <span class="ico">🗑️</span><span class="lbl">Arsip</span>
         </a>
+        <a href="/siakad-mini/public/audit.php" class="shortcut">
+            <span class="ico">📋</span><span class="lbl">Audit Log</span>
+        </a>
         <?php endif; ?>
     </div>
 

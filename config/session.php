@@ -73,4 +73,4 @@ function verifyCsrf(): void
     // Token sekali pakai — hapus setelah validasi
     unset($_SESSION['csrf_token']);
 }
-"<?php // session helper" 
+

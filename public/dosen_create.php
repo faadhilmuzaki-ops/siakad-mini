@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/session.php';
+require_once __DIR__ . '/../classes/AuditLog.php';
 
 requireLogin();
 
 $pdo    = getDB();
+$audit  = new AuditLog();
 $errors = [];
 $input  = ['nidn'=>'','nama'=>'','email'=>'','program_studi'=>'','status'=>'aktif'];
 
@@ -95,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':status'        => $input['status'],
         ]);
 
+        $audit->catat('CREATE', 'dosen', 'Tambah dosen: ' . $input['nama']);
         $_SESSION['flash'] = 'Dosen ' . $input['nama'] . ' berhasil ditambahkan.';
         header('Location: /siakad-mini/public/dosen.php');
         exit;
@@ -208,3 +211,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </body>
 </html>
+<?php // audit-create
